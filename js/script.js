@@ -36,3 +36,36 @@ function mostraPergunta() {
     caixaAlternativas.textoContent = "";
     mostraAlternativas();
 }
+
+function mostraAlternativa() {
+    for (const alternativa of perguntaAtual.alternativas) {
+        const botaoAlternativas = document.createElement("button");
+        botaoAlternativas.textContent = alternativa.texto;
+        botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
+        caixaoAltermativas.appendChild(botaoAlternativas);
+    }
+}
+ 
+function respostaSelecionada(opcaoSelecionada) {
+    const afirmacos = aleatorio(opcaoSelecionada.afirmacao);
+    historiaFinal += afirmacos + " ";
+    if(opcaoSelecionada.proxima !== undefined) {
+        atual = opcaoSelecionada.proxima;
+    } else {
+        mostraResultado();
+        return;
+    }
+    mostraPergunta();
+}
+
+function mostraResultado() {
+    caixaPerguntas.textContent = 'Em 2049, $(nome)';
+    textoResultado.textoContent = historiaFinal;
+    caixaAlternativas.textoContent = "";
+    caixaResultado.classList.add("mostrar");
+    botaoJogarNovamente.addEventListener("click",jogaNovamente);
+}
+
+function jogaNovamente( {
+
+})
